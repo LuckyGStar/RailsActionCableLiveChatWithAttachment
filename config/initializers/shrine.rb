@@ -10,17 +10,18 @@ Shrine.storages = {
 
 Shrine.plugin :activerecord # enable ActiveRecord support
 Shrine.plugin :determine_mime_type # check MIME TYPE
-Shrine.plugin :validation_helpers, default_messages: {
-    mime_type_inclusion: ->(whitelist) { # you may use whitelist variable to display allowed types
-      "isn't of allowed type. It must be an image."
-    }
-}
 
-Shrine::Attacher.validate do
-  validate_mime_type_inclusion [ # whitelist only these MIME types
-                                   'image/jpeg',
-                                   'image/png',
-                                   'image/gif'
-                               ]
-  validate_max_size 1.megabyte # limit file size to 1MB
-end
+# Shrine.plugin :validation_helpers, default_messages: {
+#     mime_type_inclusion: ->(whitelist) { # you may use whitelist variable to display allowed types
+#       "isn't of allowed type. It must be an image."
+#     }
+# }
+# 
+# Shrine::Attacher.validate do
+#   validate_mime_type_inclusion [ # whitelist only these MIME types
+#                                    'image/jpeg',
+#                                    'image/png',
+#                                    'image/gif'
+#                                ]
+#   validate_max_size 1.megabyte # limit file size to 1MB
+# end
