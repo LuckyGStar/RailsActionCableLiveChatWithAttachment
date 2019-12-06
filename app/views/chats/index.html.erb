@@ -1,1 +1,13 @@
 <h1>Demo Chat</h1>
+
+<div id="messages">
+  <%= render @messages %>
+</div>
+
+<form class="form__message-new">
+  <div class="form-group">
+    <label for="body">Body</label>
+    <textarea class="form-control input--message_body" placeholder="Enter message body here..."></textarea>
+  </div>
+  <button type="submit" class="btn btn-primary">Submit</button>
+</form>
