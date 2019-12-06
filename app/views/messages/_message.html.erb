@@ -2,6 +2,6 @@
   <strong><%= message.user.email %></strong> says:
   <%= message.body %>
   <br>
-  <small>at <%= message.created_at, format: :short %></small>
+  <small>at <%= l message.created_at, format: :short %></small>
   <hr>
 </div>
