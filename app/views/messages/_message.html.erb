@@ -1,6 +1,6 @@
 <div class="message">
   <strong><%= message.user.email %></strong> says:
-  <%= message.body %>
+  <%= content_with_emoji(message.body) %>
   <br>
   <small>at <%= l message.created_at, format: :short %></small>
   <% if message.attachment_data? %>

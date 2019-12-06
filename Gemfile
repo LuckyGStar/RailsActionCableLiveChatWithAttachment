@@ -40,6 +40,8 @@ gem 'clearance', '~> 1.16'
 # Use shrine for message attachments upload
 gem 'shrine', '~> 2.6'
 
+gem 'rails_emoji_picker'
+
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
   gem 'byebug', platform: :mri
