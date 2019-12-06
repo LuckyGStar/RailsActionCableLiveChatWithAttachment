@@ -37,6 +37,8 @@ gem 'jbuilder', '~> 2.5'
 
 # Use clearance for simple auth without devise
 gem 'clearance', '~> 1.16'
+# Use shrine for message attachments upload
+gem 'shrine', '~> 2.6'
 
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console

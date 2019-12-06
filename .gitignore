@@ -17,5 +17,8 @@
 !/log/.keep
 !/tmp/.keep
 
+# Ignore uploaded files
+/public/uploads
+
 # Ignore Byebug command history file.
 .byebug_history

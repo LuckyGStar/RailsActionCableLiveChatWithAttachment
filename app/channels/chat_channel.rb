@@ -7,6 +7,13 @@ class ChatChannel < ApplicationCable::Channel
   end
   
   def send_message(data)
-    current_user.messages.create(body: data['message'])
+    message = current_user.messages.build(body: data['message'])
+    
+    if data['file_uri']
+      message.attachment_name = data['original_name']
+      message.attachment_data_uri = data['file_uri']
+    end
+    
+    message.save
   end
 end

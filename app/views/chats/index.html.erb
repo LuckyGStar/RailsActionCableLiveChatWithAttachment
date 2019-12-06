@@ -5,9 +5,19 @@
 </div>
 
 <form class="form__message-new" action="#">
+  
   <div class="form-group">
     <label for="body">Body</label>
     <textarea class="form-control input--message_body" placeholder="Enter message body here..."></textarea>
   </div>
+  
+  <div class="form-group">
+    <label for="body">Attachment</label>
+    <input class="input--message_attachment" type="file"></input>
+    <br>
+    <small>Only PNG, JPG and GIF images are allowed</small>
+  </div>
+  
   <button type="submit" class="btn btn-primary">Submit</button>
+  
 </form>
