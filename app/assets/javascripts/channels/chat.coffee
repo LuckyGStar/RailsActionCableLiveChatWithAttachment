@@ -16,12 +16,16 @@ jQuery(document).on 'turbolinks:load', ->
       if data['message']
         $newMessageBody.val('')
         $messages.append data['message']
+        
     send_message: (message, file_uri, original_name) ->
       @perform 'send_message', message: message, file_uri: file_uri, original_name: original_name
 
     $newMessageForm.submit (e) ->
       $this = $(this)
       messageBody = $newMessageBody.val()
+      
+      # clear input field for next type
+      $newMessageBody.val('')
       
       if $.trim(messageBody).length > 0 or $newMessageAttachment.get(0).files.length > 0
         if $newMessageAttachment.get(0).files.length > 0 # if file is chosen

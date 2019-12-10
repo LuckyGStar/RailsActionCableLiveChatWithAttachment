@@ -1,4 +1,8 @@
-<div class="message">
+<% if current_user == message.user %>
+  <div class="message">
+<% else %>
+  <div class="message align-right">
+<% end %>
   <strong><%= message.user.email %></strong> says:
   <%= content_with_emoji(message.body) %>
   <br>
