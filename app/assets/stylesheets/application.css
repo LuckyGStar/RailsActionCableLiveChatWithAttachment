@@ -14,11 +14,3 @@
  *= require rails_emoji_picker
  *= require_self
  */
-
-.align-left {
-  text-align: left
-}
-
-.align-right {
-  text-align: right
-}

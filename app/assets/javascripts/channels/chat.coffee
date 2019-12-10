@@ -1,8 +1,8 @@
 jQuery(document).on 'turbolinks:load', ->
   $messages = $('#messages')
   $newMessageForm = $('.form__message-new')
-  $newMessageBody = $newMessageForm.find('.input--message_body')
-  $newMessageAttachment = $newMessageForm.find('.input--message_attachment')
+  $newMessageBody = $newMessageForm.find('.form__input-body')
+  $newMessageAttachment = $newMessageForm.find('.form__input-attachment')
   
   if $messages.length
     App.chat = App.cable.subscriptions.create {
@@ -23,9 +23,6 @@ jQuery(document).on 'turbolinks:load', ->
     $newMessageForm.submit (e) ->
       $this = $(this)
       messageBody = $newMessageBody.val()
-      
-      # clear input field for next type
-      $newMessageBody.val('')
       
       if $.trim(messageBody).length > 0 or $newMessageAttachment.get(0).files.length > 0
         if $newMessageAttachment.get(0).files.length > 0 # if file is chosen
