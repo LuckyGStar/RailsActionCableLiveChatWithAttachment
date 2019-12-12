@@ -8,11 +8,11 @@ class Message < ApplicationRecord
   include AttachmentUploader[:attachment]
 
   def attachment_name=(name)
-      @attachment_name = name
+    @attachment_name = name
   end
 
   def attachment_name
-      @attachment_name
+    @attachment_name
   end
   
   private

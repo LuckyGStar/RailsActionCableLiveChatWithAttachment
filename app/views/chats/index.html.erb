@@ -1,6 +1,8 @@
 <h1>Demo Chat</h1>
 
 <div id="messages">
+  <input type="hidden" class="hidden__input-user" name="" value="<%= current_user.id %>">
+  
   <%= render @messages %>
 </div>
 
@@ -12,12 +14,31 @@
   </div>
   
   <div class="form-group">
-    <label for="body">Attachment</label>
-    <input class="form__input-attachment" type="file"></input>
+    <label for="body">Video</label>
+    <input class="form__input-attachment-video" type="file" accept=".mp4,.avi,.mpg"></input>
     <br>
-    <!-- <small>Only PNG, JPG and GIF images are allowed</small> -->
-    <small>All mime types are allowed</small>
+    <small>Only VIDEO files are allowed</small>
   </div>
+  
+  <br>
+  
+  <div class="form-group">
+    <label for="body">Image</label>
+    <input class="form__input-attachment-image" type="file" accept=".png,.jpg,.gif"></input>
+    <br>
+    <small>Only PNG, JPG and GIF images are allowed</small>
+  </div>
+  
+  <br>
+  
+  <div class="form-group">
+    <label for="body">DOCS</label>
+    <input class="form__input-attachment-doc" type="file" accept=".xls,.xlsx,.pdf"></input>
+    <br>
+    <small>Only CSV, XLSX, PDF files are allowed</small>
+  </div>
+  
+  <br>
   
   <button type="submit" class="btn btn-primary">Submit</button>
   

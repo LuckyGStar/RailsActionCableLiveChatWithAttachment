@@ -1,9 +1,14 @@
 jQuery(document).on 'turbolinks:load', ->
   $messages = $('#messages')
+  $inputCurrentUser = $('.hidden__input-user')
   $newMessageForm = $('.form__message-new')
   $newMessageBody = $newMessageForm.find('.form__input-body')
-  $newMessageAttachment = $newMessageForm.find('.form__input-attachment')
+  $newMessageVideoAttachment = $newMessageForm.find('.form__input-attachment-video')
+  $newMessageImageAttachment = $newMessageForm.find('.form__input-attachment-image')
+  $newMessageDocumentAttachment = $newMessageForm.find('.form__input-attachment-doc')
   
+  currentUser = $inputCurrentUser.val()
+    
   if $messages.length
     App.chat = App.cable.subscriptions.create {
       channel: 'ChatChannel'
@@ -14,8 +19,19 @@ jQuery(document).on 'turbolinks:load', ->
       
     received: (data) ->
       if data['message']
+        $newMessageVideoAttachment.val('')
+        $newMessageImageAttachment.val('')
+        $newMessageDocumentAttachment.val('')
         $newMessageBody.val('')
-        $messages.append data['message']
+        $newMessageBody.text('')
+        
+        messageTemplate = ''
+        
+        if (data['user'] == parseInt(currentUser))
+          messageTemplate = "<div class='message align-left'>#{data['message']}</div>"
+        else
+          messageTemplate = "<div class='message align-right'>#{data['message']}</div>"
+        $messages.append messageTemplate
         
     send_message: (message, file_uri, original_name) ->
       @perform 'send_message', message: message, file_uri: file_uri, original_name: original_name
@@ -24,15 +40,31 @@ jQuery(document).on 'turbolinks:load', ->
       $this = $(this)
       messageBody = $newMessageBody.val()
       
-      if $.trim(messageBody).length > 0 or $newMessageAttachment.get(0).files.length > 0
-        if $newMessageAttachment.get(0).files.length > 0 # if file is chosen
+      if $.trim(messageBody).length > 0 or $newMessageVideoAttachment.get(0).files.length > 0 or $newMessageImageAttachment.get(0).files.length > 0 or $newMessageDocumentAttachment.get(0).files.length > 0
+        if $newMessageVideoAttachment.get(0).files.length > 0 # if file is chosen
           reader = new FileReader()  # use FileReader API
-          fileName = $newMessageAttachment.get(0).files[0].name # get the name of the first chosen file
+          fileName = $newMessageVideoAttachment.get(0).files[0].name # get the name of the first chosen file
           reader.addEventListener "loadend", -> # perform the following action after the file is loaded
             App.chat.send_message messageBody, reader.result, fileName  # send message with file
             # at this point reader.result is a BASE64-encoded file
             
-          reader.readAsDataURL $newMessageAttachment.get(0).files[0] # read file in base 64 format
+          reader.readAsDataURL $newMessageVideoAttachment.get(0).files[0] # read file in base 64 format
+        else if $newMessageImageAttachment.get(0).files.length > 0 # if file is chosen
+          reader = new FileReader()  # use FileReader API
+          fileName = $newMessageImageAttachment.get(0).files[0].name # get the name of the first chosen file
+          reader.addEventListener "loadend", -> # perform the following action after the file is loaded
+            App.chat.send_message messageBody, reader.result, fileName  # send message with file
+            # at this point reader.result is a BASE64-encoded file
+            
+          reader.readAsDataURL $newMessageImageAttachment.get(0).files[0] # read file in base 64 format
+        else if $newMessageDocumentAttachment.get(0).files.length > 0 # if file is chosen
+          reader = new FileReader()  # use FileReader API
+          fileName = $newMessageDocumentAttachment.get(0).files[0].name # get the name of the first chosen file
+          reader.addEventListener "loadend", -> # perform the following action after the file is loaded
+            App.chat.send_message messageBody, reader.result, fileName  # send message with file
+            # at this point reader.result is a BASE64-encoded file
+            
+          reader.readAsDataURL $newMessageDocumentAttachment.get(0).files[0] # read file in base 64 format
         else
           App.chat.send_message messageBody
       
