@@ -9,6 +9,19 @@
   <small>at <%= l message.created_at, format: :short %></small>
   <% if message.attachment_data? %>
     <br>
+    <% if message.attachment.metadata['mime_type'].include? 'image' %>
+      <img src="<%= message.attachment.url %>" alt="" width=50 height=50>
+    <% end %>
+    
+    <% if message.attachment.metadata['mime_type'].include? 'video' %>
+      <video width="100" height="100" controls>
+        <source src="<%= message.attachment.url %>" type="<%= message.attachment.metadata['mime_type'] %>">
+      </video>
+      <br>
+    <% end %>
+    
+    <br/>
+    
     <%= link_to "View #{message.attachment.original_filename}",
                 message.attachment.url, target: '_blank' %>
   <% end %>
