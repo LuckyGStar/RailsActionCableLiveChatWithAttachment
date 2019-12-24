@@ -4,4 +4,6 @@ Rails.application.routes.draw do
   root 'chats#index'
   
   mount ActionCable.server => '/cable'
+  
+  get 'chats/list_messages/:id', :to => 'chats#list_messages'
 end

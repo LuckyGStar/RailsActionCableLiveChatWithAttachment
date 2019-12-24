@@ -1,0 +1,5 @@
+<% if user.id != current_user.id %>
+<div class="chat__contact--element" data-id="<%= user.id %>">
+  <h1><%= user.email %></h1>
+</div>
+<% end %>

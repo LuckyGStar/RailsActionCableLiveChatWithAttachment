@@ -1,4 +1,4 @@
-<strong><%= message.user.email %></strong> says:
+<strong><%= message.sender.email %></strong> says:
 <%= content_with_emoji(message.body) %>
 <br>
 <small>at <%= l message.created_at, format: :short %></small>

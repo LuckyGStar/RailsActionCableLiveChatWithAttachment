@@ -22,3 +22,32 @@
 .align-right {
   text-align: right;
 }
+
+.chat__main--wrapper {
+  .chat__main--sub-section {
+    width: 50%;
+    float: left;
+  }
+  
+  .chat__contact--panel {
+    .chat__contact--element {
+      width: 80%;
+      margin: auto;
+      margin-bottom: 20px;
+      border: 3px solid grey;
+      cursor: pointer;
+    }
+    
+    .is-active { 
+      background: grey;
+    }
+    
+    .is-new-message {
+      border: 1px solid red;
+    }
+  }
+  
+  .chat__message--panel {
+    
+  }
+}

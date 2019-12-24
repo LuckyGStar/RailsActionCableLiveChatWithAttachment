@@ -1,45 +1,53 @@
 <h1>Demo Chat</h1>
 
-<div id="messages">
-  <input type="hidden" class="hidden__input-user" name="" value="<%= current_user.id %>">
+<div class="chat__main--wrapper">
+  <input type="hidden" class="input__active--user" name="active_user" value="-1">
+  <input type="hidden" class="input__current--user" name="current_user" value="<%= current_user.id %>">
   
-  <%= render @messages %>
-</div>
+  <div class="chat__main--sub-section chat__contact--panel">
+    <%= render @users %>
+  </div>
+  <div class="chat__main--sub-section chat__message--panel">
+    <div id="messages">
+      
+    </div>
 
-<form class="form__message-new" action="#">
-  
-  <div class="form-group">
-    <label for="body">Body</label>
-    <textarea class="form-control form__input-body" placeholder="Enter message body here..." data-emojiable="true"></textarea>
+    <form class="form__message-new" action="#">
+      
+      <div class="form-group">
+        <label for="body">Body</label>
+        <textarea class="form-control form__input-body" placeholder="Enter message body here..." data-emojiable="true"></textarea>
+      </div>
+      
+      <div class="form-group">
+        <label for="body">Video</label>
+        <input class="form__input-attachment-video" type="file" accept=".mp4,.avi,.mpg"></input>
+        <br>
+        <small>Only VIDEO files are allowed</small>
+      </div>
+      
+      <br>
+      
+      <div class="form-group">
+        <label for="body">Image</label>
+        <input class="form__input-attachment-image" type="file" accept=".png,.jpg,.gif"></input>
+        <br>
+        <small>Only PNG, JPG and GIF images are allowed</small>
+      </div>
+      
+      <br>
+      
+      <div class="form-group">
+        <label for="body">DOCS</label>
+        <input class="form__input-attachment-doc" type="file" accept=".xls,.xlsx,.pdf"></input>
+        <br>
+        <small>Only CSV, XLSX, PDF files are allowed</small>
+      </div>
+      
+      <br>
+      
+      <button type="submit" class="btn btn-primary">Submit</button>
+      
+    </form>
   </div>
-  
-  <div class="form-group">
-    <label for="body">Video</label>
-    <input class="form__input-attachment-video" type="file" accept=".mp4,.avi,.mpg"></input>
-    <br>
-    <small>Only VIDEO files are allowed</small>
-  </div>
-  
-  <br>
-  
-  <div class="form-group">
-    <label for="body">Image</label>
-    <input class="form__input-attachment-image" type="file" accept=".png,.jpg,.gif"></input>
-    <br>
-    <small>Only PNG, JPG and GIF images are allowed</small>
-  </div>
-  
-  <br>
-  
-  <div class="form-group">
-    <label for="body">DOCS</label>
-    <input class="form__input-attachment-doc" type="file" accept=".xls,.xlsx,.pdf"></input>
-    <br>
-    <small>Only CSV, XLSX, PDF files are allowed</small>
-  </div>
-  
-  <br>
-  
-  <button type="submit" class="btn btn-primary">Submit</button>
-  
-</form>
+</div>
