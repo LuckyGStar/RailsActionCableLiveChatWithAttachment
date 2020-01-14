@@ -15,12 +15,34 @@
  *= require_self
  */
 
+.hidden {
+  display: none;
+}
+
+.unknown {
+  background: brown;
+}
+
 .align-left {
   text-align: left;
 }
 
 .align-right {
   text-align: right;
+}
+
+.members--wrapper {
+  .card {
+    width: 20%;
+    margin-left: 2%;
+    margin-right: 2%;
+    float: left;
+    border: 1px solid grey;
+  }
+}
+
+.form__friend--request-manage {
+  border: 1px solid blue;
 }
 
 .chat__main--wrapper {
@@ -43,11 +65,13 @@
     }
     
     .is-new-message {
-      border: 1px solid red;
+      border: 4px solid green;
     }
   }
   
   .chat__message--panel {
-    
+    textarea {
+      width:  100%
+    }
   }
 }

@@ -1,5 +1,13 @@
 <% if user.id != current_user.id %>
-<div class="chat__contact--element" data-id="<%= user.id %>">
-  <h1><%= user.email %></h1>
-</div>
+  <% if (@active_user.present? && user.id != @active_user.id) || !@active_user.present? %>
+    <% if current_user.is_friend? user %>
+      <div class="chat__contact--element" data-id="<%= user.id %>">
+        <h1><%= user.email %></h1>
+      </div>
+    <% else %>
+      <div class="chat__contact--element unknown" data-id="<%= user.id %>">
+        <h1><%= user.email %></h1>
+      </div>
+    <% end %>
+  <% end %>
 <% end %>

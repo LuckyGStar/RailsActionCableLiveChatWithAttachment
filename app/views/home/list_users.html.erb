@@ -1,0 +1,17 @@
+<%= link_to 'Back', root_path %>
+<div class="members--wrapper">
+  <% @users.each do |user| %>
+    <% if user.id != current_user.id %>
+      <div class="card">
+        <div class="chat__contact--element" data-id="<%= user.id %>">
+          <h1><%= user.email %></h1>
+          <% if current_user.is_friend?(user) %>
+            <%= link_to 'message to', chats_path(:active_user => user.id) %>
+          <% else %>
+            <%= link_to 'add a friend', chats_path(:active_user => user.id, :friend_request => true) %>
+          <% end %>
+        </div>
+      </div>
+    <% end %>
+  <% end %>
+</div>

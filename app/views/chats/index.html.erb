@@ -1,17 +1,39 @@
 <h1>Demo Chat</h1>
-
+<%= link_to 'Back', root_path %>
 <div class="chat__main--wrapper">
-  <input type="hidden" class="input__active--user" name="active_user" value="-1">
+  <% if @active_user.present? %>
+    <input type="hidden" class="input__active--user" name="active_user" value="<%= @active_user.id %>">
+  <% else %>
+    <input type="hidden" class="input__active--user" name="active_user" value="-1">
+  <% end %>
+  
+  <% if @is_friend_request.present? %>
+    <input type="hidden" class="input__friend--request" name="friend_request" value="1" data-user-id="<%= @active_user.id %>" data-sent-cnt="0">
+  <% else %>
+    <input type="hidden" class="input__friend--request" name="friend_request" value="-1">
+  <% end %>
+  
   <input type="hidden" class="input__current--user" name="current_user" value="<%= current_user.id %>">
   
   <div class="chat__main--sub-section chat__contact--panel">
+    <% if @active_user.present? %>
+      <div class="chat__contact--element is-active" data-id="<%= @active_user.id %>">
+        <h1><%= @active_user.email %></h1>
+      </div>
+    <% end %>
+    
     <%= render @users %>
   </div>
   <div class="chat__main--sub-section chat__message--panel">
     <div id="messages">
       
     </div>
-
+    
+    <div class="form__friend--request-manage hidden">
+      <button class="btn__friend--request-accept" type="button" name="button">Accept</button>
+      <button class="btn__friend--request-deny" type="button" name="button">Deny</button>
+    </div>
+    
     <form class="form__message-new" action="#">
       
       <div class="form-group">
@@ -51,3 +73,47 @@
     </form>
   </div>
 </div>
+
+<script type="text/javascript">
+  $(document).ready(() => {
+    const $messages = $('#messages')
+    const $contactElement = $('.chat__contact--element')
+    const $inputActiveUser = $('.input__active--user')
+    const $inputCurrentUser = $('.input__current--user')
+    const $newFriendRequestManage = $('.form__friend--request-manage')
+    const $btnFriendRequestAccept = $('.btn__friend--request-accept')
+    const $btnFriendRequestDeny = $('.btn__friend--request-deny')
+    
+    $('.chat__contact--element').on('click', (e) => {
+      console.log('I am clicked')
+      const $selectedContactElement = $(e.currentTarget)
+      const selectedUserId = $selectedContactElement.data('id')
+      const isFriendRequest = $selectedContactElement.data('is-friend-request')
+      
+      if ($selectedContactElement.hasClass('unknown') && !$selectedContactElement.hasClass('is-friend-request')) {
+        alert("This user is not in your friends list yet, you can't send message to him now.")
+        return
+      }
+      
+      $contactElement.removeClass('is-active')
+      $contactElement.removeClass('is-new-message')
+      
+      if (isFriendRequest == 1) {
+        $newFriendRequestManage.removeClass('hidden')
+      }
+      
+      $.ajax({
+        type: "GET", 
+        url: "/chats/list_messages/" + selectedUserId,
+        data: {},
+        success: (data, textStatus, jqXHR) => {
+          $messages.html(data)
+        },
+        error: (jqXHR, textStatus, errorThrown) => {}
+      })
+
+      $selectedContactElement.addClass('is-active')
+      $inputActiveUser.val(selectedUserId)
+    })
+  })
+</script>
