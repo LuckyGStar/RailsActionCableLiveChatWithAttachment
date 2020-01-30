@@ -84,6 +84,16 @@
     const $btnFriendRequestAccept = $('.btn__friend--request-accept')
     const $btnFriendRequestDeny = $('.btn__friend--request-deny')
     
+    const $document = $(document)
+    const $window = $(window)
+    const itemsToShow = 5
+    
+    $window.on('scroll', () => {
+      if ($document.height() - $window.height() - $(this).scrollTop() == 0) {
+        $(`.message:hidden:lt(${itemsToShow})`).show()
+      }
+    })
+    
     $('.chat__contact--element').on('click', (e) => {
       console.log('I am clicked')
       const $selectedContactElement = $(e.currentTarget)
@@ -108,6 +118,10 @@
         data: {},
         success: (data, textStatus, jqXHR) => {
           $messages.html(data)
+          
+          $('.message').filter(function(index) {
+              return (($(this).offset().top) > $window.height())
+          }).hide()
         },
         error: (jqXHR, textStatus, errorThrown) => {}
       })
