@@ -95,7 +95,7 @@
     })
     
     $('.chat__contact--element').on('click', (e) => {
-      console.log('I am clicked')
+      const $htmlBody = $('html, body')
       const $selectedContactElement = $(e.currentTarget)
       const selectedUserId = $selectedContactElement.data('id')
       const isFriendRequest = $selectedContactElement.data('is-friend-request')
@@ -111,6 +111,8 @@
       if (isFriendRequest == 1) {
         $newFriendRequestManage.removeClass('hidden')
       }
+      
+      $htmlBody.animate({ scrollTop: $(document).height() }, "slow")
       
       $.ajax({
         type: "GET", 
