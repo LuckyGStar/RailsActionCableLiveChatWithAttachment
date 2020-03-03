@@ -74,6 +74,13 @@
   </div>
 </div>
 
+<style media="screen">
+#messages{
+ height: 300px;
+ overflow-y: scroll;
+}
+</style>
+
 <script type="text/javascript">
   $(document).ready(() => {
     const $messages = $('#messages')
@@ -112,7 +119,7 @@
         $newFriendRequestManage.removeClass('hidden')
       }
       
-      $htmlBody.animate({ scrollTop: $(document).height() }, "slow")
+      $messages.animate({ scrollTop: $(document).height() }, "slow")
       
       $.ajax({
         type: "GET", 
