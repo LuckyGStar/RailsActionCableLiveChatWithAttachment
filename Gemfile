@@ -36,7 +36,7 @@ gem 'jbuilder', '~> 2.5'
 # gem 'capistrano-rails', group: :development
 
 # Use clearance for simple auth without devise
-gem 'clearance', '~> 1.16'
+gem 'clearance', '~> 2.5'
 # Use shrine for message attachments upload
 gem 'shrine', '~> 2.6'
 
